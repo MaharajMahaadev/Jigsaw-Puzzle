@@ -3,6 +3,7 @@
 import type React from "react"
 import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
+import { Button } from "@/components/ui/button"
 
 interface ImageUploadProps {
   onImageUpload: (imageData: string, width: number, height: number) => void
@@ -46,15 +47,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
     [onImageUpload],
   )
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, open } = useDropzone({ onDrop, noClick: true })
 
   return (
-    <div
-      {...getRootProps()}
-      className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer"
-    >
+    <div {...getRootProps()} className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
       <input {...getInputProps()} />
-      {isDragActive ? <p>Drop the image here ...</p> : <p>Drag 'n' drop an image here, or click to select an image</p>}
+      <p className="mb-4">Drag 'n' drop an image here, or click the button to select an image</p>
+      <Button onClick={open}>Upload Image</Button>
     </div>
   )
 }

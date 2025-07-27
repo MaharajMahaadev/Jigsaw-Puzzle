@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import PuzzlePiece from "./PuzzlePiece"
 import ZoomControl from "./ZoomControl"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Button } from "@/components/ui/button"
 
 interface PuzzleBoardProps {
   image: string
@@ -68,7 +69,10 @@ const PuzzleBoard: React.FC<PuzzleBoardProps> = ({ image, size, difficulty }) =>
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <ZoomControl zoom={zoom} setZoom={setZoom} maxZoom={3} />
+      <div className="flex items-center space-x-4">
+        <ZoomControl zoom={zoom} setZoom={setZoom} maxZoom={3} />
+        <Button onClick={() => window.location.reload()}>Upload New Image</Button>
+      </div>
       <div className="flex flex-wrap justify-center gap-8">
         <ScrollArea className="h-[600px] w-[600px] rounded-md border">
           <div ref={containerRef} className="relative" style={{ width: size.width * zoom, height: size.height * zoom }}>
